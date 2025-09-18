@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robizen7 - Mis Aplicaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 30%, #1e3c72 60%, #4a90e2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 10%, rgba(74, 144, 226, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(116, 185, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(45, 45, 45, 0.3) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(45, 45, 45, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            margin-bottom: 50px;
+            border-radius: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #c8e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3, #2d3436);
+        }
+
+        .app-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .app-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .app-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .app-description {
+            color: #636e72;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(116, 185, 255, 0.6);
+            background: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+        }
+
+        .download-icon {
+            font-size: 1.3rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            padding: 50px 0;
+            text-align: center;
+            margin-top: auto;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(116, 185, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(9, 132, 227, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .author {
+            color: #74b9ff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .author-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-links a:hover {
+            color: #74b9ff;
+            background: rgba(116, 185, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .app-card {
+                padding: 30px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .logo {
+                width: 120px;
+            }
+
+            .app-card {
+                padding: 25px;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Reemplaza "logo-robizen7.png" con la ruta de tu logo -->
+            <img src="logo-robizen7.png" alt="Robizen7 Logo" class="logo">
+            <h1>Robizen7</h1>
+            <p class="subtitle">Mis Aplicaciones Desarrolladas</p>
+        </header>
+
+        <main>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <span class="app-icon">📅</span>
+                    <h2 class="app-title">Agenda Personal</h2>
+                    <p class="app-description">
+                        Una aplicación completa para gestionar tu agenda personal. 
+                        Organiza tus citas, recordatorios y eventos de manera eficiente 
+                        con una interfaz intuitiva y fácil de usar. Perfecta para mantener 
+                        tu vida organizada y productiva.
+                    </p>
+                    <a href="app-release.apk" download class="download-btn">
+                        <span class="download-icon">📥</span>
+                        Descargar APK
+                    </a>
+                </div>
+
+                <div class="app-card">
+                    <span class="app-icon">🚀</span>
+                    <h2 class="app-title">Próximamente</h2>
+                    <p class="app-description">
+                        Estoy trabajando en nuevas aplicaciones increíbles que cambiarán 
+                        tu forma de interactuar con la tecnología. Mantente atento para 
+                        más lanzamientos próximamente y descubre las innovaciones que tengo preparadas.
+                    </p>
+                    <a href="#" class="download-btn" style="opacity: 0.7; cursor: not-allowed; background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);">
+                        <span class="download-icon">⏳</span>
+                        En Desarrollo
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <img src="logo-robizen7.png" alt="Robizen7 Logo" class="footer-logo">
+            <p class="footer-text">Desarrollado con pasión y dedicación</p>
+            <p class="author">Hector Robert Pacompia</p>
+            <p class="author-subtitle">Conocido como: Robizen7</p>
+            <div class="social-links">
+                <a href="mailto:pacompiahectorrobert@gmail.com">
+                    <span>📧</span> Contacto
+                </a>
+                <a href="#">
+                    <span>🌐</span> Portfolio
+                </a>
+                <a href="#">
+                    <span>📱</span> Más Apps
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
